@@ -1,42 +1,116 @@
 package com.company;
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.company.model.Artists;
+import com.company.model.Datasourse;
 
-public class Main {
-
-    // definition
-    public static final String DB_NAME = "test.db:";
-
-    public static final String TABLE_NAME = "contacts";
-    public static final String COLUMN_NAME = "name";
-    public static final String COLUMN_PHONE = "phone";
-    public static final String COLUMN_EMAIL = "email";
-
+public class Main{
 
     public static void main(String[] args) {
-	// write your code here
-
-
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:E:\\JavaPractice\\TestJD\\test.db");
-            //conn.setAutoCommit(false);
-            Statement statement = conn.createStatement();
-            statement.execute("DROP TABLE IF EXISTS"+ TABLE_NAME );
-            statement.execute("CREATE TABLE IF NOT EXISTS " + TABLE_NAME +"(" + COLUMN_NAME + "TEXT NOT NULL COLUMN_PHONE INTEGER , COLUMN_EMAIL TEXT)); // don't need add ; in the sql string
-
-            statement.execute("INSERT INTO contact VALUES ('A', 4654,'eraa@gmail.com')");
-            statement.execute("INSERT INTO contact VALUES ('B', 5454,'B@gmail.com')");
-            statement.execute("INSERT INTO contact VALUES ('C', 7554,'C@gmail.com')");
-            // close the connection
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            System.out.println("Something Wrong " + e.getMessage());
+        Datasourse datasourse = new Datasourse();
+        if (!datasourse.open()){
+            System.out.println("Can't open");
+            return;
         }
-    }
 
-//    public static void insert_Contact(Statement statement, String name, String )
+        List<Artists> res = new ArrayList<>();
+        res = datasourse.queryArtist(datasourse.DEC_ORDER);
+        for (Artists cur : res) {
+            System.out.println("Name: " + cur.getName() + "   ID: "+ cur.get_id());
+        }
+        datasourse.close();
+    }
 }
+
+
+//
+//public class Main {
+//    public static final String DB_NAME = "test.db";
+//    public static final String CONNECTION_STRING = "jdbc:sqlite:C:\\Users\\T-Rain\\Documents\\GitHub\\JavaPractice\\TestJD" + DB_NAME;
+//
+//    public static final String TABLE_CONTACTS = "contacts";
+//
+//    public static final String COLUMN_NAME = "name";
+//    public static final String COLUMN_PHONE = "phone";
+//    public static final String COLUMN_EMAIL = "email";
+//
+//    public static void main(String[] args) {
+//
+//        try {
+//            Connection conn = DriverManager.getConnection(CONNECTION_STRING);
+//            Statement statement = conn.createStatement();
+//
+//            statement.execute("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+//
+//            statement.execute("CREATE TABLE IF NOT EXISTS " + TABLE_CONTACTS +
+//                    " (" + COLUMN_NAME + " text, " +
+//                    COLUMN_PHONE + " integer, " +
+//                    COLUMN_EMAIL + " text" +
+//                    ")");
+//
+//            insertContact(statement,"Tim", 6545678, "tim@email.com");
+//            insertContact(statement,"Joe", 45632, "joe@anywhere.com");
+//            insertContact(statement,"Jane", 4829484, "jane@somewhere.com");
+//            insertContact(statement,"Fido", 9038, "dog@email.com");
+//
+//            statement.execute("UPDATE " + TABLE_CONTACTS + " SET " +
+//                    COLUMN_PHONE + "=5566789" +
+//                    " WHERE " + COLUMN_NAME + "='Jane'");
+//
+//            statement.execute("DELETE FROM " +TABLE_CONTACTS +
+//                    " WHERE " + COLUMN_NAME + "='Joe'");
+//
+//            ResultSet results = statement.executeQuery("SELECT * FROM " + TABLE_CONTACTS);
+//            while(results.next()) {
+//                System.out.println(results.getString(COLUMN_NAME) + " " +
+//                        results.getInt(COLUMN_PHONE) + " " +
+//                        results.getString(COLUMN_EMAIL));
+//            }
+//
+//            results.close();
+//
+//            statement.close();
+//            conn.close();
+//
+////            Connection conn = DriverManager.getConnection("jdbc:sqlite:D:\\databases\\testjava.db");
+////            Class.forName("org.sql.JDBC");
+//
+//        } catch (SQLException e) {
+//            System.out.println("Something went wrong: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private static void insertContact(Statement statement, String name, int phone, String email) throws SQLException {
+//        statement.execute("INSERT INTO " + TABLE_CONTACTS +
+//                " (" + COLUMN_NAME + ", " +
+//                COLUMN_PHONE + ", " +
+//                COLUMN_EMAIL +
+//                " ) " +
+//                "VALUES('" + name + "', " + phone + ", '" + email + "')");
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
