@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Datasourse {
     public static final String DATA_NAME = "music.db";
-    public static final String CONNECTION_STRING = "jdbc:sqlite:C:\\Users\\T-Rain\\Documents\\GitHub\\JavaPractice\\" + DATA_NAME;
+    public static final String CONNECTION_STRING = "jdbc:sqlite:E:\\JavaPractice\\" + DATA_NAME;
 
     // albums table
     public static final String TABLE_ALBUMS = "albums";
