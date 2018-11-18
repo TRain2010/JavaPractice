@@ -11,6 +11,10 @@
           class="com.train.springlearn.BaseballCoach">
         <constructor-arg ref = "myFortune"/>
     </bean>
+    <bean id = "myCricketCoach"
+          class= "com.train.springlearn.CricketCoach">
+        <property name="fortuneService" ref="myFortune"> </property>
+    </bean>
 
     <bean id = "myCoach2" class="com.train.springlearn.TrackCoach">
         <constructor-arg ref = "myFortune"/>
