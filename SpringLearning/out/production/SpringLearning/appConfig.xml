@@ -5,16 +5,18 @@
     <bean id = "myFortune"
           class="com.train.springlearn.HappyFortuneService">
     </bean>
-
+    <!-- Set up Setter Injection -->
+    <bean id = "myCricketCoach"
+          class= "com.train.springlearn.CricketCoach">
+        <property name="fortuneService" ref="myFortune"/>
+        <property name="dailyWork" value="Cricket work"/>
+    </bean>
     <!-- Set up constructor injections -->
     <bean id = "myCoach"
           class="com.train.springlearn.BaseballCoach">
         <constructor-arg ref = "myFortune"/>
     </bean>
-    <bean id = "myCricketCoach"
-          class= "com.train.springlearn.CricketCoach">
-        <property name="fortuneService" ref="myFortune"> </property>
-    </bean>
+
 
     <bean id = "myCoach2" class="com.train.springlearn.TrackCoach">
         <constructor-arg ref = "myFortune"/>

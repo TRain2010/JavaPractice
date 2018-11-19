@@ -8,7 +8,8 @@
     <!-- Set up Setter Injection -->
     <bean id = "myCricketCoach"
           class= "com.train.springlearn.CricketCoach">
-        <property name="fortuneService" ref="myFortune"> </property>
+        <property name="fortuneService" ref="myFortune"/>
+        <property name="dailyWork" value="Cricket work"/>
     </bean>
     <!-- Set up constructor injections -->
     <bean id = "myCoach"

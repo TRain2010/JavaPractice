@@ -25,7 +25,7 @@ public class myApp {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("appConfig.xml");
         // retrieve bean
-        Coach theCoach = context.getBean("myCricketCoach", Coach.class);
+        CricketCoach theCoach = context.getBean("myCricketCoach", CricketCoach.class);
 
         // call methods on the bean
         System.out.println(theCoach.getDailyFortune());
